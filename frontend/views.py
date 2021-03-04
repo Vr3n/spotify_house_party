@@ -10,3 +10,6 @@ def join_room(request, *args, **kwargs):
 
 def create_room(request, *args, **kwargs):
     return render(request, 'frontend/index.html')
+
+def room(request, *args, **kwargs):
+    return render(request, 'frontend/index.html')

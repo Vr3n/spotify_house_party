@@ -52,7 +52,7 @@ export default class CreateRoom extends Component {
 
         fetch('/api/create-room/', requestOptions)
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => this.props.history.push('/room/' + data.code));
 
     }
 
@@ -78,7 +78,7 @@ export default class CreateRoom extends Component {
                 </Grid>
                 <Grid item xs={12} align="center">
                     <FormControl>
-                        <TextField onChange={this.votesChangeHandler} required={true} type="number" default={this.defaultVotes} inputProps={{
+                        <TextField onChange={this.votesChangeHandler} required={true} type="number" default={this.state.votesToSkip} inputProps={{
                             min: 1,
                             style: {
                                 textAlign: 'center'
