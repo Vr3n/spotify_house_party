@@ -52,13 +52,13 @@ export default class CreateRoom extends Component {
 
         fetch('/api/create-room/', requestOptions)
             .then((res) => res.json())
-            .then((data) => this.props.history.push('/room/' + data.code));
+            .then((data) => this.props.history.push('/room/' + data.code) + '/');
 
     }
 
     render() {
         return (
-            <Grid container spacing={1}>
+            <Grid container spacing={1} className="center">
                 {console.log(this.state)}
                 <Grid item xs={12} align="center">
                     <Typography component="h4" variant="h4">
@@ -78,7 +78,7 @@ export default class CreateRoom extends Component {
                 </Grid>
                 <Grid item xs={12} align="center">
                     <FormControl>
-                        <TextField onChange={this.votesChangeHandler} required={true} type="number" default={this.state.votesToSkip} inputProps={{
+                        <TextField onChange={this.votesChangeHandler} required={true} type="number" defaultValue={this.state.votesToSkip} inputProps={{
                             min: 1,
                             style: {
                                 textAlign: 'center'

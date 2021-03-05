@@ -12,7 +12,24 @@ export class App extends Component {
 
     constructor(props) {
         super(props)
+
+        this.state = {
+            roomCode: null,
+        }
     }
+
+    async componentDidMount () {
+        fetch('/api/user-in-room/')
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.code)
+                this.setState({
+                    roomCode: data.code,
+                });
+            });
+    }
+
+    renderHomePage = () => <HomePage />
 
     render() {
         return (
@@ -21,7 +38,7 @@ export class App extends Component {
                     <Route path="/room/:code" exact component={Room} />
                     <Route path="/join_room" exact component={RoomJoin} />
                     <Route path="/create_room" exact component={CreateRoom} />
-                    <Route path="/" component={HomePage}></Route>
+                    <Route path="/" render={() => this.state.roomCode ? (<Redirect to={`/room/${this.state.roomCode}/`} />) : (this.renderHomePage())}></Route>
                 </Switch>
             </Router>
         
