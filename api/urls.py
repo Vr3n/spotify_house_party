@@ -1,8 +1,9 @@
 from api.models import Room
 from django.urls import path, include
-from .views import JoinRoom, RoomView, CreateRoomView, GetRoom, UserInRoom, LeaveRoom
+from .views import JoinRoom, RoomView, CreateRoomView, GetRoom, UserInRoom, LeaveRoom, UpdateRoom
 
 urlpatterns = [
+    path('update-room/', UpdateRoom.as_view(), name="update_room"),
     path('leave-room/', LeaveRoom.as_view(), name="leave_room"),
     path('user-in-room/', UserInRoom.as_view(), name="user_in_room"),
     path('create-room/', CreateRoomView.as_view(), name="create_rooms"),
