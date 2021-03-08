@@ -2,6 +2,8 @@ from django.urls import path
 
 from .views import index, join_room, create_room, room
 
+app_name = 'frontend'
+
 urlpatterns = [
     path('room/<str:code>/', room, name="room"),
     path('create_room/', create_room, name="create_room"),
