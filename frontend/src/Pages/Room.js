@@ -14,10 +14,29 @@ export default class Room extends Component {
             isHost: false,
             guestCanPause: false,
             showSettings: false,
+            spotifyAuthenticated: false,
         };
 
         this.roomCode = this.props.match.params.code;
         this.getRoomDetails();
+    }
+
+    authenticateSpotify = () => {
+        fetch('/spotify_api/is-spotify-authenticated')
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    spotifyAuthenticated: data.status
+                })
+                console.log(data)
+                if (!data.status) {
+                    fetch('/spotify_api/get-auth-url')
+                        .then(res => res.json())
+                        .then(data => {
+                            window.location.replace(data.url);
+                        });
+                }
+            });
     }
 
     getRoomDetails = () => {
@@ -29,6 +48,9 @@ export default class Room extends Component {
                     guestCanPause: data.guest_can_pause,
                     isHost: data.is_host,
                 });
+                if (this.state.isHost) {
+                    this.authenticateSpotify()
+                }
                 console.log(data);
             });
     }
