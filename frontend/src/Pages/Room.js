@@ -118,7 +118,7 @@ export default class Room extends Component {
         }
 
         return (
-            <Grid container spacing={1} alignItems="center" className="center">
+            <Grid container spacing={1} alignItems="center" className="center" >
                 <Grid item align="center" xs={12}>
                     <Typography component="h3" variant="h3">
                         Room no: {this.roomCode}
@@ -128,7 +128,6 @@ export default class Room extends Component {
                 {
                     this.state.isHost ? this.renderSettingsButton() : null
                 }
-
                 <Grid item align="center" xs={12}>
                     <Button variant="contained" color="secondary" onClick={this.leaveRoomHandler} >Leave Room</Button>
                 </Grid>
